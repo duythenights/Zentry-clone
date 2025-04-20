@@ -1,9 +1,44 @@
 import clsx from "clsx";
+import { useEffect, useRef } from "react";
 
-const Button = ({ id, title, rightIcon, leftIcon, containerClass }) => {
+const Button = ({
+  id,
+  title,
+  rightIcon,
+  leftIcon,
+  containerClass,
+  hoverSound = "/audio/ui.mp3", // new prop
+}) => {
+  const audioRef = useRef(null);
+
+  // Preload audio once
+  useEffect(() => {
+    if (hoverSound) {
+      audioRef.current = new Audio(hoverSound);
+      audioRef.current.preload = "auto";
+    }
+  }, [hoverSound]);
+
+  // Handlers
+  const handleMouseEnter = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  };
+
   return (
     <button
       id={id}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className={clsx(
         "group relative z-10 w-fit cursor-pointer overflow-hidden rounded-full bg-violet-50 px-7 py-3 text-black",
         containerClass
