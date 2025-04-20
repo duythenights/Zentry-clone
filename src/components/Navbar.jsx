@@ -27,6 +27,27 @@ const NavBar = () => {
     setIsIndicatorActive((prev) => !prev);
   };
 
+  // Global listen event to auto play audio
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      if (audioElementRef.current && !isAudioPlaying) {
+        audioElementRef.current.play();
+        setIsAudioPlaying(true);
+        setIsIndicatorActive(true);
+      }
+
+      // Remove listener after first interaction
+      window.removeEventListener("mousedown", handleUserInteraction);
+    };
+
+    // Attach once to capture any interaction
+    window.addEventListener("mousedown", handleUserInteraction);
+
+    return () => {
+      window.removeEventListener("mousedown", handleUserInteraction);
+    };
+  }, []);
+
   // Manage audio playback
   useEffect(() => {
     if (isAudioPlaying) {
@@ -104,6 +125,7 @@ const NavBar = () => {
                 className="hidden"
                 src="/audio/loop.mp3"
                 loop
+                autoPlay
               />
               {[1, 2, 3, 4].map((bar) => (
                 <div
