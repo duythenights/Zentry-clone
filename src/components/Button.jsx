@@ -8,6 +8,8 @@ const Button = ({
   leftIcon,
   containerClass,
   hoverSound = "/audio/ui.mp3", // new prop
+  hoverSoundAt = 0,
+  children,
 }) => {
   const audioRef = useRef(null);
 
@@ -15,9 +17,10 @@ const Button = ({
   useEffect(() => {
     if (hoverSound) {
       audioRef.current = new Audio(hoverSound);
+      audioRef.current.currentTime = hoverSoundAt;
       audioRef.current.preload = "auto";
     }
-  }, [hoverSound]);
+  }, [hoverSound, hoverSoundAt]);
 
   // Handlers
   const handleMouseEnter = () => {
@@ -34,7 +37,15 @@ const Button = ({
     }
   };
 
-  return (
+  return children ? (
+    <span
+      id={id}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {children}
+    </span>
+  ) : (
     <button
       id={id}
       onMouseEnter={handleMouseEnter}
