@@ -5,6 +5,7 @@ import clsx from "clsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// eslint-disable-next-line react/prop-types
 const AnimatedTitle = ({ title, containerClass }) => {
   const containerRef = useRef(null);
 

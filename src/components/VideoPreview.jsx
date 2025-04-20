@@ -1,6 +1,7 @@
 import { gsap } from "gsap";
 import { useState, useRef, useEffect } from "react";
 
+// eslint-disable-next-line react/prop-types
 export const VideoPreview = ({ children }) => {
   const [isHovering, setIsHovering] = useState(false);
 
