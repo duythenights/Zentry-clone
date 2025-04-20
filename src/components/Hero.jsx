@@ -19,6 +19,13 @@ const Hero = () => {
   const totalVideos = 4;
   const nextVdRef = useRef(null);
 
+  const transitionSoundRef = useRef(null);
+
+  useEffect(() => {
+    transitionSoundRef.current = new Audio("/audio/whoosh.mp3");
+    transitionSoundRef.current.volume = 0.8;
+  }, []);
+
   const handleVideoLoad = () => {
     setLoadedVideos((prev) => prev + 1);
   };
@@ -38,6 +45,12 @@ const Hero = () => {
   useGSAP(
     () => {
       if (hasClicked) {
+        // Play sound when transition starts
+        if (transitionSoundRef.current) {
+          transitionSoundRef.current.currentTime = 0;
+          transitionSoundRef.current.play();
+        }
+
         gsap.set("#next-video", { visibility: "visible" });
         gsap.to("#next-video", {
           transformOrigin: "center center",
@@ -47,6 +60,13 @@ const Hero = () => {
           duration: 1,
           ease: "power1.inOut",
           onStart: () => nextVdRef.current.play(),
+          onComplete: () => {
+            // Stop sound after transition completes
+            if (transitionSoundRef.current) {
+              transitionSoundRef.current.pause();
+              transitionSoundRef.current.currentTime = 0;
+            }
+          },
         });
         gsap.from("#current-video", {
           transformOrigin: "center center",
