@@ -1,12 +1,12 @@
 # Zentry.com Landing Page Clone
 
-This project is a **clone of the Zentry.com landing page**, built using **React.js** and **GSAP** (GreenSock Animation Platform). It replicates the design, layout, and interactive animations of the original Zentry website to showcase modern frontend development skills.
+This project is a **clone of the Zentry.com landing page**, built using **React.js** and **GSAP** (GreenSock Animation Platform - free now). It replicates the design, layout, and interactive animations of the original Zentry website to showcase modern frontend development skills.
 
 ## 🚀 Tech Stack
 
 - **React.js** – for component-based UI development
 - **GSAP** – for smooth, high-performance animations and transitions
-- **CSS / SCSS / Tailwind** *(optional based on your setup)* – for styling and responsive design
+- **CSS / SCSS / Tailwind** _(optional based on your setup)_ – for styling and responsive design
 
 ## 🖼️ Features
 
@@ -21,3 +21,4 @@ This project is a **clone of the Zentry.com landing page**, built using **React.
    ```bash
    git clone https://github.com/yourusername/zentry-clone.git
    cd zentry-clone
+   ```
